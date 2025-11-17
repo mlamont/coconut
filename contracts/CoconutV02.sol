@@ -13,7 +13,7 @@ import {ERC721Utils} from "@openzeppelin/contracts/token/ERC721/utils/ERC721Util
 /// @author Merrill B. Lamont III (rockopera.eth)
 /// @notice Own a design. Name that design. Make art onchain.
 /// @dev Onchain art tech for onchain art work: 1 NFT design swatch for each of the 65K+ 4x4 design combinations.
-contract CoconutV01 is
+contract CoconutV02 is
     Initializable,
     ERC721Upgradeable,
     OwnableUpgradeable,
