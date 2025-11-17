@@ -20,10 +20,13 @@ contract CoconutV01 is
     UUPSUpgradeable
 {
     /// @dev Custom string per unique tokenId, which can appear in the NFT pic.
-    mapping(uint => string) internal _tokenNames;
+    mapping(uint => string) private _tokenNames;
 
-    // For converting from the decimal to the hexadecimal number system.
-    // bytes16 private constant _HEX_SYMBOLS = "0123456789ABCDEF";
+    // For converting from the decimal to the "xo" code.
+    bytes2 private constant _XO_CODE = "ox";
+
+    // Max value for tokenId.
+    uint private constant _MAXTOKENID = 65535;
 
     // Base price per token.
     uint private constant _MINTPRICE = 0.001 ether;
@@ -117,7 +120,7 @@ contract CoconutV01 is
         require(!upgradeabilityEnded(), "Contract is not upgradeable");
     }
 
-    // TODO: code the design tiers
+    // TODO: test the design tiers
     /// @notice Creates a token.
     /// @dev Validates designxo, then passes to a private function to actually do it.
     /// @param designxo Design's 16-digit "xo" representation.
@@ -128,23 +131,12 @@ contract CoconutV01 is
     ) external payable {
         if (bytes(tokenName).length > 32) revert InvalidTokenName(); // cheapest check, first
         uint tokenId = aGetId(designxo); // gets tokenId
-        if (tokenId == 0 || tokenId == 16777215) {
-            // extra premium pricing for: black, white
+        if (tokenId == 0 || tokenId == _MAXTOKENID) {
+            // extra premium pricing for: all-o, all-x
             if (msg.value < (10000 * _MINTPRICE))
                 revert NeedMoreFundsForThisToken(10000 * _MINTPRICE);
-        } else if (
-            tokenId == 255 ||
-            tokenId == 65280 ||
-            tokenId == 16711680 ||
-            tokenId == 65535 ||
-            tokenId == 16711935 ||
-            tokenId == 16776960
-        ) {
-            // premium pricing for: blue, green, red, cyan, magenta, yellow
-            if (msg.value < (1000 * _MINTPRICE))
-                revert NeedMoreFundsForThisToken(1000 * _MINTPRICE);
         } else {
-            // regular pricing for: the rest of the Web Colors
+            // regular pricing for: the rest of the Rockopera Designs
             if (msg.value < _MINTPRICE)
                 revert NeedMoreFundsForThisToken(_MINTPRICE);
         }
@@ -279,7 +271,7 @@ contract CoconutV01 is
         _;
     }
 
-    // TODO: encode
+    // TODO: test designxo <-> tokenId
     /// @notice Converts a design's designxo into its tokenId: the token's internal ID.
     /// @dev Validates and converts a design "xo" string into a decimal integer: the tokenId.
     /// @param designxo Design's 16-digit "xo" representation.
@@ -288,46 +280,32 @@ contract CoconutV01 is
         // decimal number 'n' is birthed, to be constructed, then returned
         bytes calldata designxoBytes = bytes(designxo); // so not repeatedly converting in for loop
         if (designxoBytes.length != 16) revert InvalidDesignxo();
-        // color-hexadecimal number is iterated through, but starting with lowest numeral
+        // design-xo code is iterated through, but starting with lowest numeral
         for (uint i; i < 16; ) {
-            // hexadecimal numeral is represented as its place (0-127) within the ASCII character mapping
+            // "xo" code is represented as its place (0-127) within the ASCII character mapping
             uint a = uint8(designxoBytes[15 - i]);
-            // ASCII 0-9: decimal 0-9
+            // x:120, o:111
             unchecked {
-                // Combine ASCII ranges: 0-9 (48-57), A-F (65-70), a-f (97-102)
-                if (a > 47 && a < 58) {
-                    n += (a - 48) << (4 * i);
-                } else if (a > 64 && a < 71) {
-                    n += (a - 55) << (4 * i);
-                } else if (a > 96 && a < 103) {
-                    n += (a - 87) << (4 * i);
-                } else {
-                    revert InvalidDesignxo();
-                }
+                if (a != 111 && a != 120) revert InvalidDesignxo();
+                n += (a == 120 ? 1 : 0) << i;
                 ++i;
             }
         }
-        // decimal number is the sum of the hexadecimal values in the hexadecimal number system's places (units, 16's, 256's, etc., instead of units, 10's, 100's, etc.)
-
-        // ...next line should probably be an 'assert', since it is critical internal logic
-        // require(n < 16777216, "too large tokenId"); // just should NOT happen, based on above construction
-        // assert(n < 16777216);
-        if (n > 65535) revert InvalidTokenId();
-        // return n;
+        if (n > _MAXTOKENID) revert InvalidTokenId();
     }
 
-    // TODO: encode
+    // TODO: test tokenId <-> designxo
     /// @notice Converts a token's tokenId into its designxo: the design's 16-digit "xo" code.
     /// @dev Validates and converts a tokenId decimal integer into a "xo" string: the designxo.
     /// @param n Color's tokenId.
     /// @return designxo 16-digit "xo" representation of design.
     function getDesignxo(uint n) public pure returns (string memory designxo) {
-        if (n > 65535) revert InvalidTokenId();
-        bytes memory designxoBytes = new bytes(16); // color-hexadecimal number is one size
+        if (n > _MAXTOKENID) revert InvalidTokenId();
+        bytes memory designxoBytes = new bytes(16); // design-xo code is one size
         for (uint i = 1; i < 17; ) {
-            // color-hexadecimal number is constructed, but starting with lowest numeral
-            designxoBytes[16 - i] = _HEX_SYMBOLS[n & 0xF]; // convert the decimal number's 4 rightmost bits into a hexadecimal numeral using bitwise AND
-            n >>= 4; // shift the decimal number rightwards by 4 bits, allowing subsequent conversions of decimal number's 4 rightmost bits to a hexadecimal numeral
+            // design-xo code is constructed, but starting with lowest numeral
+            designxoBytes[16 - i] = _XO_CODE[n & 0x1]; // convert the decimal number's 1 rightmost bit into a "xo" representation using bitwise AND
+            n >>= 1; // shift the decimal number rightwards by 1 bit, allowing subsequent conversions of decimal number's 1 rightmost bit to a "xo" representation
             unchecked {
                 ++i;
             }
@@ -336,6 +314,7 @@ contract CoconutV01 is
         designxo = string(designxoBytes); // color-hexadecimal number is actually a string, which is a stringing together of the correctly placed hexadecimal numerals
     }
 
+    // TODO: set SVG-picture
     /// @notice Retrieves a token's URI.
     /// @dev Makes the JSON, which contains the name, description, and picture (an SVG), all on-chain.
     /// @param tokenId Design's tokenId.
@@ -343,7 +322,7 @@ contract CoconutV01 is
     function tokenURI(
         uint256 tokenId
     ) public view override returns (string memory tokenUri) {
-        if (tokenId > 65535) revert InvalidTokenId();
+        if (tokenId > _MAXTOKENID) revert InvalidTokenId();
 
         string memory tokenName = _getTokenName(tokenId);
         string memory designxo = getDesignxo(tokenId);
