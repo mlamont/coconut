@@ -36,8 +36,41 @@ contract CoconutV03 is
     string private constant _SVG_PART_2 =
         '</text><text x="50%" y="337" text-anchor="middle" class="base">#';
     string private constant _SVG_PART_3 =
-        '</text><rect x="50" y="50" width="250" height="250" fill="#';
-    string private constant _SVG_PART_4 = '" /></svg>';
+        '</text><rect x="50" y="50" width="250" height="250" fill="#808080"/>';
+    string private constant _SVG_SQUARE_01 =
+        '<rect x="55" y="55" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_02 =
+        '<rect x="115" y="55" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_03 =
+        '<rect x="175" y="55" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_04 =
+        '<rect x="235" y="55" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_05 =
+        '<rect x="55" y="115" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_06 =
+        '<rect x="115" y="115" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_07 =
+        '<rect x="175" y="115" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_08 =
+        '<rect x="235" y="115" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_09 =
+        '<rect x="55" y="175" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_10 =
+        '<rect x="115" y="175" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_11 =
+        '<rect x="175" y="175" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_12 =
+        '<rect x="235" y="175" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_13 =
+        '<rect x="55" y="235" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_14 =
+        '<rect x="115" y="235" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_15 =
+        '<rect x="175" y="235" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_16 =
+        '<rect x="235" y="235" width="60" height="60" fill="#';
+    string private constant _SVG_SQUARE_END_CAP = '"/>';
+    string private constant _SVG_CODE_END_CAP = '"/></svg>';
 
     /// @notice Logs the change to the custom string per unique tokenId.
     event TokenRename(
@@ -271,7 +304,6 @@ contract CoconutV03 is
         _;
     }
 
-    // TODO: test designxo <-> tokenId
     /// @notice Converts a design's designxo into its tokenId: the token's internal ID.
     /// @dev Validates and converts a design "xo" string into a decimal integer: the tokenId.
     /// @param designxo Design's 16-digit "xo" representation.
@@ -294,7 +326,6 @@ contract CoconutV03 is
         if (n > _MAXTOKENID) revert InvalidTokenId();
     }
 
-    // TODO: test tokenId <-> designxo
     /// @notice Converts a token's tokenId into its designxo: the design's 16-digit "xo" code.
     /// @dev Validates and converts a tokenId decimal integer into a "xo" string: the designxo.
     /// @param n Color's tokenId.
