@@ -1017,6 +1017,51 @@
       "artifacts": [
         "IERC721Receiver"
       ]
+    },
+    "/Users/mbl3/w3x/coconut/contracts/CoconutV02.sol": {
+      "lastModificationDate": 1763421206564,
+      "contentHash": "bb40155bcf2f2cf6580708b6ca9dd33b",
+      "sourceName": "contracts/CoconutV02.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol",
+        "@openzeppelin/contracts/utils/Base64.sol",
+        "@openzeppelin/contracts/utils/StorageSlot.sol",
+        "@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol"
+      ],
+      "versionPragmas": [
+        "0.8.28"
+      ],
+      "artifacts": [
+        "CoconutV02"
+      ]
     }
   }
 }
