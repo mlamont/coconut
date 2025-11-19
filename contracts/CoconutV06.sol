@@ -14,7 +14,7 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 /// @author Merrill B. Lamont III (rockopera.eth)
 /// @notice Own a design. Name that design. Make art onchain.
 /// @dev Onchain art tech for onchain art work: 1 NFT design swatch for each of the 65K+ 4x4 design combinations.
-contract CoconutV05 is
+contract CoconutV06 is
     Initializable,
     ERC721Upgradeable,
     OwnableUpgradeable,

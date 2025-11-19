@@ -1107,6 +1107,52 @@
       "artifacts": [
         "CoconutV04"
       ]
+    },
+    "/Users/mbl3/w3x/coconut/contracts/CoconutV05.sol": {
+      "lastModificationDate": 1763578486131,
+      "contentHash": "160d4f68a4317bde68d3ec2ae7c503a7",
+      "sourceName": "contracts/CoconutV05.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "storageLayout"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+        "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol",
+        "@openzeppelin/contracts/utils/Base64.sol",
+        "@openzeppelin/contracts/utils/StorageSlot.sol",
+        "@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol",
+        "@openzeppelin/contracts/utils/Strings.sol"
+      ],
+      "versionPragmas": [
+        "0.8.28"
+      ],
+      "artifacts": [
+        "CoconutV05"
+      ]
     }
   }
 }
