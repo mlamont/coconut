@@ -12,7 +12,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -58,7 +57,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -99,7 +97,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -137,7 +134,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -175,7 +171,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -217,7 +212,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -255,7 +249,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -303,7 +296,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -344,7 +336,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -384,7 +375,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -422,7 +412,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -465,7 +454,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -505,7 +493,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -543,7 +530,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -581,7 +567,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -619,7 +604,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -660,7 +644,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -702,7 +685,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -742,7 +724,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -782,7 +763,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -822,7 +802,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -860,7 +839,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -901,7 +879,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -941,7 +918,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -979,7 +955,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1017,7 +992,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1055,7 +1029,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1090,10 +1063,10 @@
         "CoconutV02"
       ]
     },
-    "/Users/mbl3/w3x/coconut/contracts/CoconutV03.sol": {
-      "lastModificationDate": 1763522080915,
-      "contentHash": "54b7ce47ac70dd5988f3b19c157a7dc9",
-      "sourceName": "contracts/CoconutV03.sol",
+    "/Users/mbl3/w3x/coconut/contracts/CoconutV04.sol": {
+      "lastModificationDate": 1763554987867,
+      "contentHash": "7308ba7f498c6f014a5d0509e8aa52f1",
+      "sourceName": "contracts/CoconutV04.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
@@ -1101,7 +1074,6 @@
             "enabled": true,
             "runs": 1000
           },
-          "viaIR": true,
           "evmVersion": "paris",
           "outputSelection": {
             "*": {
@@ -1133,7 +1105,7 @@
         "0.8.28"
       ],
       "artifacts": [
-        "CoconutV03"
+        "CoconutV04"
       ]
     }
   }

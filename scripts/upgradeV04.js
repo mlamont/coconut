@@ -1,6 +1,6 @@
 const { ethers, upgrades } = require("hardhat");
 async function main() {
-  const CoconutLatest = await ethers.getContractFactory("CoconutV03");
+  const CoconutLatest = await ethers.getContractFactory("CoconutV04");
   console.log("Upgrading Coconut...");
 
   await upgrades.upgradeProxy(
