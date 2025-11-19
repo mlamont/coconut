@@ -366,12 +366,13 @@ contract CoconutV03 is
             designxo,
             _SVG_TEXT_END,
             _SVG_SQUARE_01,
-            (tokenId >> 0) & 0x1 ? "000000" : "FFFFFF",
+            ((tokenId >> 0) & 0x1) != 0 ? "000000" : "FFFFFF",
             _SVG_SQUARE_END,
             _SVG_SQUARE_02,
-            (tokenId >> 1) & 0x1 ? "000000" : "FFFFFF",
+            ((tokenId >> 1) & 0x1) != 0 ? "000000" : "FFFFFF",
             _SVG_SQUARE_END,
             _SVG_SQUARE_03,
+            /*
             (tokenId >> 2) & 0x1 ? "000000" : "FFFFFF",
             _SVG_SQUARE_END,
             _SVG_SQUARE_04,
@@ -413,6 +414,7 @@ contract CoconutV03 is
             _SVG_SQUARE_16,
             (tokenId >> 15) & 0x1 ? "000000" : "FFFFFF",
             _SVG_SQUARE_END,
+            */
             _SVG_CODE_END
         );
 
