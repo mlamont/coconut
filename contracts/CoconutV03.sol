@@ -31,11 +31,11 @@ contract CoconutV03 is
     // Base price per token.
     uint private constant _MINTPRICE = 0.001 ether;
 
-    string private constant _SVG_PART_1 =
+    string private constant _SVG_CODE_START =
         '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="50%" y="16" text-anchor="middle" rotate="180" style="fill: black; font-size: 35px;">&#9814;</text><text x="50%" y="320" text-anchor="middle" class="base">';
-    string private constant _SVG_PART_2 =
+    string private constant _SVG_BETWEEN_TWO_FERNS =
         '</text><text x="50%" y="337" text-anchor="middle" class="base">#';
-    string private constant _SVG_PART_3 =
+    string private constant _SVG_TEXT_END =
         '</text><rect x="50" y="50" width="250" height="250" fill="#808080"/>';
     string private constant _SVG_SQUARE_01 =
         '<rect x="55" y="55" width="60" height="60" fill="#';
@@ -69,8 +69,8 @@ contract CoconutV03 is
         '<rect x="175" y="235" width="60" height="60" fill="#';
     string private constant _SVG_SQUARE_16 =
         '<rect x="235" y="235" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_END_CAP = '"/>';
-    string private constant _SVG_CODE_END_CAP = '"/></svg>';
+    string private constant _SVG_SQUARE_END = '"/>';
+    string private constant _SVG_CODE_END = '"/></svg>';
 
     /// @notice Logs the change to the custom string per unique tokenId.
     event TokenRename(
@@ -360,13 +360,60 @@ contract CoconutV03 is
 
         // Pack SVG parts directly into bytes
         bytes memory svgBytes = abi.encodePacked(
-            _SVG_PART_1,
+            _SVG_CODE_START,
             tokenName,
-            _SVG_PART_2,
+            _SVG_BETWEEN_TWO_FERNS,
             designxo,
-            _SVG_PART_3,
-            designxo,
-            _SVG_PART_4
+            _SVG_TEXT_END,
+            _SVG_SQUARE_01,
+            (tokenId >> 0) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_02,
+            (tokenId >> 1) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_03,
+            (tokenId >> 2) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_04,
+            (tokenId >> 3) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_05,
+            (tokenId >> 4) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_06,
+            (tokenId >> 5) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_07,
+            (tokenId >> 6) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_08,
+            (tokenId >> 7) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_09,
+            (tokenId >> 8) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_10,
+            (tokenId >> 9) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_11,
+            (tokenId >> 10) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_12,
+            (tokenId >> 11) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_13,
+            (tokenId >> 12) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_14,
+            (tokenId >> 13) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_15,
+            (tokenId >> 14) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_SQUARE_16,
+            (tokenId >> 15) & 0x1 ? "000000" : "FFFFFF",
+            _SVG_SQUARE_END,
+            _SVG_CODE_END
         );
 
         // Base64 encode the SVG bytes
