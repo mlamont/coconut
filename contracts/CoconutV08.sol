@@ -14,7 +14,7 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 /// @author Merrill B. Lamont III (rockopera.eth)
 /// @notice Own a design. Name that design. Make art onchain.
 /// @dev Onchain art tech for onchain art work: 1 NFT design swatch for each of the 65K+ 4x4 design combinations.
-contract CoconutV06 is
+contract CoconutV08 is
     Initializable,
     ERC721Upgradeable,
     OwnableUpgradeable,
@@ -39,48 +39,11 @@ contract CoconutV06 is
     string private constant _SVG_TEXT_END =
         '"</text><rect x="50" y="50" width="250" height="250" fill="#808080';
 
-    string private constant _SVG_ROW_1A = '"/><rect x="';
-    string private constant _SVG_ROW_1B =
-        '" y="55" width="60" height="60" fill="#000000';
-
     string private constant _SVG_SQUARE_START_TO_X = '"/><rect x="';
     string private constant _SVG_SQUARE_X_TO_Y = '" y="';
     string private constant _SVG_SQUARE_Y_TO_END =
         '" width="60" height="60" fill="#000000';
 
-    string private constant _SVG_SQUARE_01 =
-        '"/><rect x="55" y="55" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_02 =
-        '"/><rect x="115" y="55" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_03 =
-        '"/><rect x="175" y="55" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_04 =
-        '"/><rect x="235" y="55" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_05 =
-        '"/><rect x="55" y="115" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_06 =
-        '"/><rect x="115" y="115" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_07 =
-        '"/><rect x="175" y="115" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_08 =
-        '"/><rect x="235" y="115" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_09 =
-        '"/><rect x="55" y="175" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_10 =
-        '"/><rect x="115" y="175" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_11 =
-        '"/><rect x="175" y="175" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_12 =
-        '"/><rect x="235" y="175" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_13 =
-        '"/><rect x="55" y="235" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_14 =
-        '"/><rect x="115" y="235" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_15 =
-        '"/><rect x="175" y="235" width="60" height="60" fill="#';
-    string private constant _SVG_SQUARE_16 =
-        '"/><rect x="235" y="235" width="60" height="60" fill="#';
-    // string private constant _SVG_SQUARE_END = '"/>';
     string private constant _SVG_CODE_END = '"/></svg>';
 
     /// @notice Logs the change to the custom string per unique tokenId.
@@ -164,7 +127,6 @@ contract CoconutV06 is
         require(!upgradeabilityEnded(), "Contract is not upgradeable");
     }
 
-    // TODO: test the design tiers
     /// @notice Creates a token.
     /// @dev Validates designxo, then passes to a private function to actually do it.
     /// @param designxo Design's 16-digit "xo" representation.
@@ -356,7 +318,6 @@ contract CoconutV06 is
         designxo = string(designxoBytes); // color-hexadecimal number is actually a string, which is a stringing together of the correctly placed hexadecimal numerals
     }
 
-    // TODO: set SVG-picture
     /// @notice Retrieves a token's URI.
     /// @dev Makes the JSON, which contains the name, description, and picture (an SVG), all on-chain.
     /// @param tokenId Design's tokenId.
@@ -377,7 +338,7 @@ contract CoconutV06 is
                     _SVG_SQUARE_START_TO_X,
                     Strings.toString(55 + (60 * (i & 0x3))),
                     _SVG_SQUARE_X_TO_Y,
-                    Strings.toString(55 + (60 * (i & 0xC))),
+                    Strings.toString(55 + (60 * (i >> 2))),
                     _SVG_SQUARE_Y_TO_END
                 );
             }
@@ -386,72 +347,6 @@ contract CoconutV06 is
                 tokenId >>= 1;
             }
         }
-
-        /*
-        // Pack SVG parts directly into bytes
-        bytes memory svgPart0 = abi.encodePacked(
-            _SVG_CODE_START,
-            tokenName,
-            _SVG_BETWEEN_TWO_FERNS,
-            designxo,
-            _SVG_TEXT_END
-        );
-
-        bytes memory svgPart1 = abi.encodePacked(
-            _SVG_SQUARE_01,
-            ((tokenId >> 0) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_02,
-            ((tokenId >> 1) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_03,
-            ((tokenId >> 2) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_04,
-            ((tokenId >> 3) & 0x1) != 0 ? "000000" : "808080"
-        );
-
-        bytes memory svgPart2 = abi.encodePacked(
-            _SVG_SQUARE_05,
-            ((tokenId >> 4) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_06,
-            ((tokenId >> 5) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_07,
-            ((tokenId >> 6) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_08,
-            ((tokenId >> 7) & 0x1) != 0 ? "000000" : "808080"
-        );
-
-        bytes memory svgPart3 = abi.encodePacked(
-            _SVG_SQUARE_09,
-            ((tokenId >> 8) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_10,
-            ((tokenId >> 9) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_11,
-            ((tokenId >> 10) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_12,
-            ((tokenId >> 11) & 0x1) != 0 ? "000000" : "808080"
-        );
-
-        uint tokenIdFullShift = tokenId >> 15; // causing "stack too deep" when expressed inline
-
-        bytes memory svgPart4 = abi.encodePacked(
-            _SVG_SQUARE_13,
-            ((tokenId >> 12) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_14,
-            ((tokenId >> 13) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_15,
-            ((tokenId >> 14) & 0x1) != 0 ? "000000" : "808080",
-            _SVG_SQUARE_16,
-            (tokenIdFullShift & 0x1) != 0 ? "000000" : "808080"
-        );
-
-        bytes memory svgBytes = abi.encodePacked(
-            svgPart0,
-            svgPart1,
-            svgPart2,
-            svgPart3,
-            svgPart4,
-            _SVG_CODE_END
-        );
-        */
 
         bytes memory svgBytes = abi.encodePacked(
             _SVG_CODE_START,
